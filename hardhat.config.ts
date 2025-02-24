@@ -52,6 +52,10 @@ export default {
       url: `https://pacific-rpc.manta.network/http`,
       accounts: [process.env.WALLET_PRIVATE_KEY || ""],
     },
+    hyperliquid_mainnet: {
+      url: `https://rpc.hyperliquid.xyz/evm`,
+      accounts: [process.env.WALLET_PRIVATE_KEY || ""],
+    },
   },
   etherscan: {
     apiKey: {
@@ -63,6 +67,7 @@ export default {
       mainnet: process.env.ETHERSCAN_KEY || "",
       manta: "",
       era: process.env.ZKSYNC_KEY || "",
+      hyperliquid_mainnet: "",
     },
     customChains: [
       {
@@ -106,6 +111,14 @@ export default {
           browserURL: "https://explorer.zircuit.com",
         },
       },
+      {
+        network: "hyperliquid_mainnet",
+        chainId: 999,
+        urls: {
+          apiURL: "https://sourcify.dev/server",
+          browserURL: "https://repo.sourcify.dev",
+        },
+      }
     ],
   },
 };
