@@ -67,7 +67,7 @@ export default {
       mainnet: process.env.ETHERSCAN_KEY || "",
       manta: "",
       era: process.env.ZKSYNC_KEY || "",
-      hyperliquid_mainnet: "",
+      hyperliquid_mainnet: "test",
     },
     customChains: [
       {
