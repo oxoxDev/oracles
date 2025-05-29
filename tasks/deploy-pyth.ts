@@ -13,16 +13,20 @@ task(`deploy-pyth`)
     const [deployer] = await hre.ethers.getSigners();
     console.log("i am", deployer.address);
     console.log("args", args);
-    const contract = await hre.ethers.deployContract("PythAggregatorV3", args);
+    
+    const contract = await hre.deployments.deploy("PythAggregatorV3", {
+      from: deployer.address,
+      args: args,
+      log: true,
+    });
 
-    await contract.waitForDeployment();
-    console.log(`deployed to`, contract.target);
+    console.log(`deployed to`, contract.address);
 
     // verify contract for tesnet & mainnet
     if (process.env.NODE_ENV != "test") {
       // Verify contract programmatically
       await hre.run("verify:verify", {
-        address: contract.target,
+        address: contract.address,
         constructorArguments: args,
       });
     } else {
