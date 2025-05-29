@@ -11,7 +11,7 @@ task(`update-pyth`)
 
     const contract = await hre.ethers.getContractAt(
       "PythAggregatorV3",
-      "0xd04a2e318e4557bb81344ea485b63d0d55732a37"
+      "0x94eae1d41036c23900DB6Af8Dd27841f4E3a5906"
     );
 
     const updateData: [`0x${string}`] = [priceid];
@@ -25,7 +25,7 @@ task(`update-pyth`)
     )) as any;
 
     const tx = await contract.updateFeeds(priceUpdateData, {
-      value: 1000000000n,
+      value: 1,
     });
 
     console.log(`tx`, tx);
