@@ -24,8 +24,11 @@ task(`update-pyth`)
       updateData
     )) as any;
 
+    const fee = await contract.getUpdateFee(priceUpdateData);
+    console.log("fee", fee);
+
     const tx = await contract.updateFeeds(priceUpdateData, {
-      value: 1,
+      value: fee,
     });
 
     console.log(`tx`, tx);

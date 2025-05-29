@@ -33,14 +33,7 @@ contract PythAggregatorV3 {
     }
 
     function updateFeeds(bytes[] calldata priceUpdateData) public payable {
-        // Update the prices to the latest available values and pay the required fee for it. The `priceUpdateData` data
-        // should be retrieved from our off-chain Price Service API using the `pyth-evm-js` package.
-        // See section "How Pyth Works on EVM Chains" below for more information.
-        uint256 fee = pyth.getUpdateFee(priceUpdateData);
-        pyth.updatePriceFeeds{value: fee}(priceUpdateData);
-
-        // refund remaining eth
-        payable(msg.sender).call{value: address(this).balance}("");
+        pyth.updatePriceFeeds{value: msg.value}(priceUpdateData);
     }
 
     function decimals() public view virtual returns (uint8) {
@@ -96,5 +89,9 @@ contract PythAggregatorV3 {
         PythStructs.Price memory price = pyth.getPriceUnsafe(priceId);
         roundId = uint80(price.publishTime);
         return (roundId, int256(price.price), price.publishTime, price.publishTime, roundId);
+    }
+
+    function getUpdateFee(bytes[] calldata priceUpdateData) public view returns (uint256) {
+        return pyth.getUpdateFee(priceUpdateData);
     }
 }
