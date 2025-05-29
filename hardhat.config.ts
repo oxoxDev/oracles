@@ -11,6 +11,8 @@ import "./tasks/deploy-pyth";
 import "./tasks/deploy-contract";
 import "./tasks/deploy-double-agg";
 import "./tasks/update-pyth";
+import "./tasks/get-pyth-data";
+import "./tasks/update-pyth-feeds";
 
 export default {
   solidity: "0.8.20",
@@ -57,6 +59,10 @@ export default {
       url: `https://rpc.berachain.com`,
       accounts: [process.env.WALLET_PRIVATE_KEY || ""],
     },
+    mezo: {
+      url: `https://jsonrpc-mezo.boar.network`,
+      accounts: [process.env.WALLET_PRIVATE_KEY || ""],
+    },
   },
   etherscan: {
     apiKey: {
@@ -69,6 +75,7 @@ export default {
       berachain: process.env.BERASCAN_KEY || "",
       manta: "",
       era: process.env.ZKSYNC_KEY || "",
+      mezo:"TEST",
     },
     customChains: [
       {
@@ -119,6 +126,14 @@ export default {
           apiURL: "https://explorer.zircuit.com/api/contractVerifyHardhat",
           browserURL: "https://explorer.zircuit.com",
         },
+      },
+      {
+        network: "mezo",
+        chainId: 31612,
+        urls: {
+          apiURL: "https://api.explorer.mezo.org/api",
+          browserURL: "https://explorer.mezo.org"
+        }
       },
     ],
   },
