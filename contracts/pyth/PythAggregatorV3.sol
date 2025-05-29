@@ -25,6 +25,8 @@ contract PythAggregatorV3 {
     bytes32 public priceId;
     IPyth public pyth;
 
+    uint256 public constant HEART_BEAT = 1 days;
+
     constructor(address _pyth, bytes32 _priceId) {
         priceId = _priceId;
         pyth = IPyth(_pyth);
@@ -42,7 +44,7 @@ contract PythAggregatorV3 {
     }
 
     function decimals() public view virtual returns (uint8) {
-        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, 1 days);
+        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, HEART_BEAT);
         return uint8(-1 * int8(price.expo));
     }
 
@@ -55,12 +57,12 @@ contract PythAggregatorV3 {
     }
 
     function latestAnswer() public view virtual returns (int256) {
-        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, 1 days);
+        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, HEART_BEAT);
         return int256(price.price);
     }
 
     function latestTimestamp() public view returns (uint256) {
-        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, 1 days);
+        PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceId, HEART_BEAT);
         return price.publishTime;
     }
 
