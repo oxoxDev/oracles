@@ -15,22 +15,19 @@ pragma solidity ^0.8.12;
 
 import "../../BaseFeedLPPendle.sol";
 
-/// @title LPUSDeDec262024Oracle
+/// @title LPUSDeAug142025Oracle
 /// @author Zerolend.
 /// @notice Gives the price of LP-USDe in ETH in base 8
-contract LPUSDeDec262024Oracle is BaseFeedLPPendle {
-    string public constant description = "LP-USDe/USD Oracle Dec 26 2024";
+contract LPUSDeAug142025Oracle is BaseFeedLPPendle {
+    string public constant description = "LP-USDe/USD Oracle Aug 14 2025";
+    address public constant USDE_PRICE_FEED = 0xa569d910839Ae8865Da8F8e70FfFb0cBA869F961;
+    address public constant PENDLE_LP_USDE_MARKET = 0xE93B4A93e80BD3065B290394264af5d82422ee70;
 
     /// @notice Constructor for an oracle following BaseFeedLPPendle
-    /// @param _pendleLPUSDeMarket The address of the Pendle LP-USDe market
-    /// @param _ethUsdFeed The address of the ETH/USD feed
-    constructor(
-        address _pendleLPUSDeMarket,
-        address _ethUsdFeed
-    )
+    constructor()
         BaseFeedLPPendle(
-            _pendleLPUSDeMarket,
-            IPriceFeed(_ethUsdFeed),
+            PENDLE_LP_USDE_MARKET,
+            IPriceFeed(USDE_PRICE_FEED),
             "Pendle LP-USDe/USD Oracle",
             1800 // 30-minute TWAP
         )

@@ -11,7 +11,7 @@ describe("LPUSDeDec262024Oracle Fork Test", function () {
   // Example addresses for Base mainnet (placeholder addresses for testing)
   // In a real deployment, these would be the actual Pendle LP USDe market and ETH/USD feed addresses
   const PENDLE_LP_USDE_MARKET = "0xe93b4a93e80bd3065b290394264af5d82422ee70"; // Pendle eUSDe market
-  const ETH_USD_FEED = "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"; // ETH/USD Chainlink feed
+  const ETH_USD_FEED = "0xa569d910839Ae8865Da8F8e70FfFb0cBA869F961"; // ETH/USD Chainlink feed
 
   beforeEach(async function () {
     // Get signers
